@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "nome": "Relogio Breguet",
+    "descricao": "Relogio suico de pulso Breguet",
+    "preco": 678,
+    "imagem": "images/breguet.jpg"
+  },
+  {
+    "id": 2,
+    "nome": "Relogio Cartier",
+    "descricao": "Relogio suico de pulso Cartier",
+    "preco": 480,
+    "imagem": "images/cartier.jpg"
+  },
+  {
+    "id": 3,
+    "nome": "Relogio Omega",
+    "descricao": "Relogio suico de pulso Omega",
+    "preco": 560,
+    "imagem": "images/omega.png"
+  },
+  {
+    "id": 4,
+    "nome": "Smart Watch U8",
+    "descricao": "Smart Watch U8 com Bluetooth",
+    "preco": 980,
+    "imagem": "images/smartwatch_u8.jpg"
+  },
+  {
+    "id": 5,
+    "nome": "Smart Watch Maxto",
+    "descricao": "Smart Watch com telefone integrado Maxto",
+    "preco": 720,
+    "imagem": "images/smartwatch_maxto.jpg"
+  },
+  {
+    "id": 6,
+    "nome": "Relogio de pulso  Ohsen",
+    "descricao": "Relogio de pulso a prova dagua Ohsen",
+    "preco": 1300,
+    "imagem": "images/ohsen_prova_dagua.jpg"
+  }
+]
