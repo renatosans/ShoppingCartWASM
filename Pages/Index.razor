@@ -1,0 +1,57 @@
+﻿@page "/"
+
+<PageTitle>Shopping Cart</PageTitle>
+
+
+@inject HttpClient Http
+@using wasmSample.Shared
+
+<style>
+    *{
+        border: 0;
+        padding: 0;
+    }
+
+	body{
+        color: black;
+		background-size: 100%;
+		background-image: url('images/wall.png');
+	}
+
+    .container{
+        text-align: center;
+    }
+
+    .grid {        
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(310px, 325px));
+        gap: 10px;
+    }
+</style>
+
+<div class="container">
+    <div id="grid" class="grid">
+        @foreach (var produto in dadosProdutos){
+            <ProductCatalog produto="@produto" shoppingCart="@shoppingCart" />
+        }
+    </div>
+</div>
+
+<div class="shoppingCart" >
+    @foreach (var produto in shoppingCart.produtosAdicionados)
+    {
+        <CartItem produto="@produto"></CartItem>
+    }
+</div>
+
+
+@code {
+    private Produto[] dadosProdutos = new Produto[] { };
+    private ShoppingCart shoppingCart = new ShoppingCart("comprador 1");
+
+    protected override async Task OnInitializedAsync()
+    {
+        dadosProdutos = await Http.GetFromJsonAsync<Produto[]>("mock_data/listaProdutos.json");
+
+    }
+}

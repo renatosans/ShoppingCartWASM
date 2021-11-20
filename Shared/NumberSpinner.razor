@@ -1,0 +1,29 @@
+﻿
+<div class="input-spinner">
+    <div id="decrease">
+        <button class="svgicon" style="background-image: url('icons/circle_minus.svg')" @onclick="decrease" />
+    </div>		
+    <div id="item_count" style="width: 40px; height: 30px; line-height: 30px; text-align: center;">
+        <span style="font-size: 20px;">@currentCount</span>
+    </div>
+    <div id="increase">
+        <button class="svgicon" style="background-image: url('icons/circle_plus.svg')" @onclick="increase" />
+    </div>
+</div>
+
+
+@code {
+    private int currentCount = 1;
+
+    private void decrease()
+    {
+        currentCount--;
+        if (currentCount<0) currentCount = 0;
+    }
+
+    private void increase()
+    {
+        currentCount++;
+        if (currentCount>99) currentCount = 99;
+    }
+}

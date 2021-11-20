@@ -1,0 +1,38 @@
+﻿
+.rounded-corners {
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #C0C5C3;
+}
+
+.vertical-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.productImage {
+    height: 250px;
+}
+
+.roundIcon {
+    border: 0px;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+    .roundIcon:hover {
+        background-color: #FF8C00;
+    }
+
+.addToCart {
+    position: absolute;
+    bottom: 90px;
+    right: 30px;
+    background-image: url('icons/cart.svg');
+    background-color: rgb(2, 132, 253);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 65%;
+}

@@ -1,0 +1,25 @@
+﻿
+<div class='vertical-container rounded-corners'>
+    <img class='productImage' src='@produto.imagem' >
+    <span> @produto.nome </span> <br/>
+    <span> @produto.descricao </span> <br/>
+    <span> Preço: R$ @produto.preco</span> <br/>
+    <button class='roundIcon addToCart' @onclick="addToCart" />
+</div>
+
+
+@code {
+    [Parameter]
+    public Produto? produto { get; set; }
+
+    [Parameter]
+    public ShoppingCart? shoppingCart { get; set; }
+
+    private void addToCart()
+    {
+        if (produto is null) return;
+        if (shoppingCart is null) return;
+
+        shoppingCart.adicionar(produto);
+    }
+}

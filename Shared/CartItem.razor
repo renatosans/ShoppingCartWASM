@@ -1,0 +1,24 @@
+﻿
+<div class="cartItem">
+    <img class="itemImage" src="@produto.imagem" />
+    <fieldset class="vertical-container">
+        <span>@produto.descricao</span>
+        <span>Preço: R$ @produto.preco</span>
+        <button id="remover" @onclick="remover"><b>Remover</b></button>
+        <NumberSpinner></NumberSpinner>
+    </fieldset>
+</div>
+
+
+@code {
+    [Parameter]
+    public Produto? produto { get; set; }
+
+    [Parameter]
+    public int quantidade { get; set; }
+
+    private void remover()
+    {
+        // not implemented
+    }
+}

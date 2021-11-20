@@ -1,0 +1,14 @@
+﻿.input-spinner {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+.svgicon {
+    background-color: transparent;
+    border: 0px;
+    width: 25px;
+    height: 25px;
+}
