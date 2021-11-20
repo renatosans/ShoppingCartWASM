@@ -1,0 +1,30 @@
+﻿@inject HttpClient Http
+@using wasmSample.Shared
+
+
+<div style="text-align:center">
+    <div id="grid" class="grid">
+        @foreach (var produto in dadosProdutos){
+            // <ProductCatalog produto="@produto" shoppingCart="@shoppingCart" />
+            <CartItem produto="@produto"></CartItem>
+        }
+    </div>
+</div>
+
+<div class="shoppingCart" >
+    @foreach (var produto in shoppingCart.produtosAdicionados)
+    {
+        <CartItem produto="@produto"></CartItem>
+    }
+</div>
+
+
+@code {
+    private Produto[] dadosProdutos = new Produto[] { };
+    private ShoppingCart shoppingCart = new ShoppingCart("comprador 1");
+
+    protected override async Task OnInitializedAsync()
+    {
+        dadosProdutos = await Http.GetFromJsonAsync<Produto[]>("mock_data/listaProdutos.json");
+    }
+}
