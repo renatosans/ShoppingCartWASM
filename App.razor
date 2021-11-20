@@ -5,8 +5,7 @@
 <div style="text-align:center">
     <div id="grid" class="grid">
         @foreach (var produto in dadosProdutos){
-            // <ProductCatalog produto="@produto" shoppingCart="@shoppingCart" />
-            <CartItem produto="@produto"></CartItem>
+            <ProductCatalog produto="@produto" shoppingCart="@shoppingCart" />
         }
     </div>
 </div>
