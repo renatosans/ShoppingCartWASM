@@ -13,7 +13,8 @@
 
 
 @code {
-    private int currentCount = 1;
+    [Parameter]
+    public int currentCount { get; set; }
 
     private void decrease()
     {
