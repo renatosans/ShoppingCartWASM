@@ -17,6 +17,14 @@
     }
 </div>
 
+<BSModal IsStaticBackdrop="true" DataId="modal2">
+    <Header></Header>
+    <Content>Produto adicionado ao carrinho.</Content>
+    <Footer Context="modal">
+        <BSButton MarginStart="Margins.Auto" Color="BSColor.Primary" @onclick="modal.HideAsync">OK</BSButton>
+    </Footer>
+</BSModal>
+<BSButton Color="BSColor.Primary" Target="modal2">Launch demo modal</BSButton>
 
 @code {
     private Produto[] dadosProdutos = new Produto[] { };
