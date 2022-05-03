@@ -1,4 +1,5 @@
 ﻿@inject HttpClient Http
+@inject DialogService DialogService
 @using wasmSample.Shared
 
 
@@ -17,14 +18,8 @@
     }
 </div>
 
-<BSModal IsStaticBackdrop="true" DataId="modal2">
-    <Header></Header>
-    <Content>Produto adicionado ao carrinho.</Content>
-    <Footer Context="modal">
-        <BSButton MarginStart="Margins.Auto" Color="BSColor.Primary" @onclick="modal.HideAsync">OK</BSButton>
-    </Footer>
-</BSModal>
-<BSButton Color="BSColor.Primary" Target="modal2">Launch demo modal</BSButton>
+<RadzenDialog></RadzenDialog>
+<RadzenButton Click="@ButtonClicked" Text="Hi"></RadzenButton>
 
 @code {
     private Produto[] dadosProdutos = new Produto[] { };
@@ -34,4 +29,17 @@
     {
         dadosProdutos = await Http.GetFromJsonAsync<Produto[]>("mock_data/listaProdutos.json");
     }
+
+    void ButtonClicked() {
+        DialogService.Open("Informação", ds => @<RadzenCard Style="padding: 1y0px;">
+        <p Style="margin-bottom: 10px;">Produto adicionado ao carrinho.</p>
+        <div class="row">
+            <div class="col-md-12">
+                <RadzenButton Text="Ok" Click="()=> ds.Close(true)" ButtonStyle="ButtonStyle.Secondary" Style="margin-bottom: 10px; width: 150px" />
+            </div>
+        </div>
+        </RadzenCard>        
+        );
+    }
+
 }
