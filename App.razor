@@ -1,5 +1,4 @@
 ﻿@inject HttpClient Http
-@inject DialogService DialogService
 @using wasmSample.Shared
 
 
@@ -18,8 +17,6 @@
     }
 </div>
 
-<RadzenDialog></RadzenDialog>
-<RadzenButton Click="@ButtonClicked" Text="Hi"></RadzenButton>
 
 @code {
     private Produto[] dadosProdutos = new Produto[] { };
@@ -28,18 +25,6 @@
     protected override async Task OnInitializedAsync()
     {
         dadosProdutos = await Http.GetFromJsonAsync<Produto[]>("mock_data/listaProdutos.json");
-    }
-
-    void ButtonClicked() {
-        DialogService.Open("Informação", ds => @<RadzenCard Style="padding: 1y0px;">
-        <p Style="margin-bottom: 10px;">Produto adicionado ao carrinho.</p>
-        <div class="row">
-            <div class="col-md-12">
-                <RadzenButton Text="Ok" Click="()=> ds.Close(true)" ButtonStyle="ButtonStyle.Secondary" Style="margin-bottom: 10px; width: 150px" />
-            </div>
-        </div>
-        </RadzenCard>        
-        );
     }
 
 }
