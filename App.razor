@@ -3,11 +3,17 @@
 @inject Bar sidebar;
 
 
+@foreach (var produto in dadosProdutos)
+{
+    // adiciona produtos aleatórios ao carrinho, para testes
+    if (produto.preco < 600) shoppingCart.adicionar(produto);
+}
+
 <BarToggler Bar="@sidebar">
     <BarIcon IconName="IconName.Bars" />
 </BarToggler>
 <Bar @ref="@sidebar" Mode="BarMode.VerticalInline" Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
-    @foreach (var produto in dadosProdutos)
+    @foreach (var produto in shoppingCart.produtosAdicionados)
     {
         <BarItem><CartItem produto="@produto"></CartItem></BarItem>
     }
