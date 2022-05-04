@@ -1,6 +1,17 @@
 ﻿@inject HttpClient Http
 @using wasmSample.Shared
+@inject Bar sidebar;
 
+
+<BarToggler Bar="@sidebar">
+    <BarIcon IconName="IconName.Bars" />
+</BarToggler>
+<Bar @ref="@sidebar" Mode="BarMode.VerticalInline" Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
+    @foreach (var produto in dadosProdutos)
+    {
+        <BarItem><CartItem produto="@produto"></CartItem></BarItem>
+    }
+</Bar>
 
 <div style="text-align:center">
     <div id="grid" class="grid">
@@ -9,14 +20,6 @@
         }
     </div>
 </div>
-
-<div class="shoppingCart" >
-    @foreach (var produto in shoppingCart.produtosAdicionados)
-    {
-        <CartItem produto="@produto"></CartItem>
-    }
-</div>
-
 
 @code {
     private Produto[] dadosProdutos = new Produto[] { };
