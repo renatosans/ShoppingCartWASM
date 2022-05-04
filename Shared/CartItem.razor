@@ -12,6 +12,9 @@
 
 @code {
     [Parameter]
+    public ShoppingCart? shoppingCart { get; set; }
+
+    [Parameter]
     public Produto? produto { get; set; }
 
     [Parameter]
@@ -19,6 +22,11 @@
 
     private void remover()
     {
-        // not implemented
+        if (shoppingCart == null) return;
+
+        // Remove o produto do carrinho
+        List<Produto> carrinho = shoppingCart.produtosAdicionados;
+        if (carrinho.Contains(produto)) carrinho.Remove(produto);
     }
+
 }

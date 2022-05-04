@@ -15,7 +15,9 @@
 <Bar @ref="@sidebar" Mode="BarMode.VerticalInline" Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
     @foreach (var produto in shoppingCart.produtosAdicionados)
     {
-        <BarItem><CartItem produto="@produto"></CartItem></BarItem>
+        <BarItem>
+            <CartItem produto="@produto" shoppingCart="@shoppingCart"></CartItem>
+        </BarItem>
     }
 </Bar>
 
