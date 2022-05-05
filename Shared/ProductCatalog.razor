@@ -12,7 +12,7 @@
 <Modal @ref="modalRef">
     <ModalContent Centered>
         <ModalHeader><b>Informação</b></ModalHeader>
-        <ModalBody>Produto adicionado ao carrinho.</ModalBody>
+        <ModalBody>@modalContent</ModalBody>
         <ModalFooter>
             <Button Color="Color.Primary" Clicked="@HideModal">Close</Button>
         </ModalFooter>
@@ -26,8 +26,12 @@
     [Parameter]
     public ShoppingCart? shoppingCart { get; set; }
 
-    private Task ShowModal()
+    // Última mensagem exibida ao usuário
+    private String modalContent = "";
+
+    private Task ShowModal(String displayText)
     {
+        this.modalContent = displayText;
         return modalRef.Show();
     }
 
@@ -40,8 +44,16 @@
         if (produto is null) return;
         if (shoppingCart is null) return;
 
+        List<Produto> carrinho = shoppingCart.produtosAdicionados;
+        List<Produto> match = carrinho.FindAll(item => item.id == produto.id);
+        if (match.Count > 0)
+        {
+            ShowModal("Este produto já se encontra no carrinho!");
+            return;
+        }
+
         shoppingCart.adicionar(produto);
 
-        ShowModal();
+        ShowModal("Produto adicionado ao carrinho.");
     }
 }
