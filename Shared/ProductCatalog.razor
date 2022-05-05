@@ -44,16 +44,14 @@
         if (produto is null) return;
         if (shoppingCart is null) return;
 
-        List<Produto> carrinho = shoppingCart.produtosAdicionados;
-        List<Produto> match = carrinho.FindAll(item => item.id == produto.id);
-        if (match.Count > 0)
-        {
+        List<Produto> match = shoppingCart.produtosAdicionados.FindAll(item => item.id == produto.id);
+        if (match.Count > 0) {
             ShowModal("Este produto já se encontra no carrinho!");
             return;
         }
 
         shoppingCart.adicionar(produto);
-
         ShowModal("Produto adicionado ao carrinho.");
     }
+
 }
