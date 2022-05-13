@@ -1,14 +1,8 @@
 ﻿
-@inject BSOffCanvas offCanvas;
 @inject HttpClient Http
+@inject BSOffCanvas offCanvas;
 @using wasmSample.Shared
 
-
-@foreach (var produto in dadosProdutos)
-{
-    // adiciona produtos aleatórios ao carrinho, para testes
-    if (produto.preco < 600) shoppingCart.adicionar(produto);
-}
 
 <div class="cart">
     <a @onclick="OpenCanvas">
@@ -17,7 +11,7 @@
 </div>
 
 <BSOffCanvas @ref="offCanvas" Placement="Placement.Right">
-    <Header>Offcanvas</Header>
+    <Header><b>Cart</b></Header>
     <Content>
     @foreach (var produto in shoppingCart.produtosAdicionados)
     {

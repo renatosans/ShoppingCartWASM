@@ -3,10 +3,9 @@
     padding: 0;
 }
 
-body{
+body {
     color: black;
-    background-size: 100%;
-    background-image: url('../images/wall.png');
+    background-image: url('../images/texture2.jpg');
 }
 
 .container{
