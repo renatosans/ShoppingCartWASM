@@ -13,8 +13,15 @@ body{
     text-align: center;
 }
 
-.grid {        
+.grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(310px, 325px));
     gap: 10px;
+}
+
+.cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    color: blue;
 }

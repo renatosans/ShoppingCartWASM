@@ -1,6 +1,7 @@
-﻿@inject HttpClient Http
-@using wasmSample.Shared
+﻿
 @inject Bar sidebar;
+@inject HttpClient Http
+@using wasmSample.Shared
 
 
 @foreach (var produto in dadosProdutos)
@@ -9,9 +10,12 @@
     if (produto.preco < 600) shoppingCart.adicionar(produto);
 }
 
-<BarToggler Bar="@sidebar">
-    <BarIcon IconName="IconName.ShoppingCart" />
-</BarToggler>
+<div class="cart">
+    <a on:click={toggle} href={null} >
+        <i class="fas fa-shopping-cart fa-lg"></i>
+    </a>
+</div>
+
 <Bar @ref="@sidebar" Mode="BarMode.VerticalInline" Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
     @foreach (var produto in shoppingCart.produtosAdicionados)
     {
