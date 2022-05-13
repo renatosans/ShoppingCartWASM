@@ -1,5 +1,5 @@
 ﻿
-@inject Bar sidebar;
+@inject BSOffCanvas offCanvas;
 @inject HttpClient Http
 @using wasmSample.Shared
 
@@ -11,19 +11,20 @@
 }
 
 <div class="cart">
-    <a on:click={toggle} href={null} >
+    <a @onclick="OpenCanvas">
         <i class="fas fa-shopping-cart fa-lg"></i>
     </a>
 </div>
 
-<Bar @ref="@sidebar" Mode="BarMode.VerticalInline" Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
+<BSOffCanvas @ref="offCanvas" Placement="Placement.Right">
+    <Header>Offcanvas</Header>
+    <Content>
     @foreach (var produto in shoppingCart.produtosAdicionados)
     {
-        <BarItem>
-            <CartItem produto="@produto" shoppingCart="@shoppingCart"></CartItem>
-        </BarItem>
+        <CartItem produto="@produto" shoppingCart="@shoppingCart"></CartItem>
     }
-</Bar>
+    </Content>
+</BSOffCanvas>
 
 <div style="text-align:center">
     <div id="grid" class="grid">
@@ -42,4 +43,9 @@
         dadosProdutos = await Http.GetFromJsonAsync<Produto[]>("mock_data/listaProdutos.json");
     }
 
+    private async Task OpenCanvas()
+    {
+        if (offCanvas != null)
+            await offCanvas.ToggleAsync();
+    }
 }
