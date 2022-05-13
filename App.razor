@@ -13,10 +13,10 @@
 <BSOffCanvas @ref="offCanvas" Placement="Placement.Right">
     <Header><b>Cart</b></Header>
     <Content>
-    @foreach (var produto in shoppingCart.produtosAdicionados)
-    {
-        <CartItem produto="@produto" shoppingCart="@shoppingCart"></CartItem>
-    }
+        @foreach (var produto in shoppingCart.produtosAdicionados)
+        {
+            <CartItem produto="@produto" shoppingCart="@shoppingCart"></CartItem>
+        }
     </Content>
 </BSOffCanvas>
 
