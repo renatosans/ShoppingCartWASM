@@ -1,11 +1,17 @@
 ﻿
+@inject BSModal modalRef;
+
 <div class='vertical-container rounded-corners'>
     <img class='productImage' src='@produto.imagem' >
     <span> @produto.nome </span> <br/>
     <span> @produto.descricao </span> <br/>
     <span> Preço: R$ @produto.preco</span> <br/>
     <button class='roundIcon addToCart' @onclick="addToCart" />
+    <BSModal @ref="modalRef">
+        <InfoModal modalContent="" parent="modalRef"></InfoModal>
+    </BSModal>
 </div>
+
 
 @code {
     [Parameter]
@@ -14,21 +20,6 @@
     [Parameter]
     public ShoppingCart? shoppingCart { get; set; }
 
-    /*
-    private String modalContent = "";
-
-    private Task ShowModal(String displayText)
-    {
-        this.modalContent = displayText;
-        return modalRef.Show();
-    }
-
-    private Task HideModal()
-    {
-        return modalRef.Hide();
-    }
-    */
-
     private void addToCart()
     {
         if (produto is null) return;
@@ -36,12 +27,14 @@
 
         List<Produto> match = shoppingCart.produtosAdicionados.FindAll(item => item.id == produto.id);
         if (match.Count > 0) {
-            // ShowModal("Este produto já se encontra no carrinho!");
+            // "Este produto já se encontra no carrinho!";
+            modalRef.ShowAsync();
             return;
         }
 
         shoppingCart.adicionar(produto);
-        // ShowModal("Produto adicionado ao carrinho.");
+        // "Produto adicionado ao carrinho.";
+        modalRef.ShowAsync();
     }
 
 }
