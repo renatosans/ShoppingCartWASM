@@ -7,10 +7,11 @@
     <span> @produto.descricao </span> <br/>
     <span> Preço: R$ @produto.preco</span> <br/>
     <button class='roundIcon addToCart' @onclick="addToCart" />
-    <BSModal @ref="modalRef">
-        <InfoModal modalContent="" parent="modalRef"></InfoModal>
-    </BSModal>
 </div>
+
+<BSModal @ref="modalRef">
+    <InfoModal modalContent="" parent="modalRef"></InfoModal>
+</BSModal>
 
 
 @code {
