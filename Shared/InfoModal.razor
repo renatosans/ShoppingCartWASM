@@ -1,18 +1,44 @@
 
-@using BlazorStrap;
-
-
-<Header>Informação</Header>
-<Content>@modalContent</Content>
-<Footer Context="parent">
-    <BSButton MarginStart="Margins.Auto" Color="BSColor.Secondary" @onclick="parent.HideAsync">Close</BSButton>
-    <BSButton Color="BSColor.Primary">Save changes</BSButton>
-</Footer>
+<div class="modal @modalClass" tabindex="-1" role="dialog" style="display:@modalDisplay">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" onclick="@Close()">&times;</button>
+            <h4 class="modal-title">Informação</h4>
+        </div>
+        <div class="modal-body">
+            <p>@modalContent</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="@Close()">Close</button>
+        </div>
+        </div>    
+    </div>
+</div>
 
 
 @code{
     [Parameter]
     public String? modalContent { get; set; }
 
-    public BSModal? parent { get; set; }
+    private String modalDisplay = "none;";
+    private String modalClass = "";
+
+    public Boolean Open()
+    {
+        modalDisplay = "block;";
+        modalClass = "Show";
+        // StateHasChanged();
+
+        return true;
+    }
+
+    public Boolean Close()
+    {
+        modalDisplay = "none";
+        modalClass = "";
+        // StateHasChanged();
+
+        return true;
+    }
 }

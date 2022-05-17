@@ -1,5 +1,5 @@
 ﻿
-@inject BSModal modalRef;
+@inject InfoModal modalRef;
 
 <div class="cartItem">
     <img class="itemImage" src="@produto.imagem" />
@@ -11,9 +11,7 @@
     </fieldset>
 </div>
 
-<BSModal @ref="modalRef">
-    <InfoModal modalContent="" parent="modalRef"></InfoModal>
-</BSModal>
+<InfoModal @ref="modalRef" modalContent=""></InfoModal>
 
 
 @code {
@@ -31,8 +29,8 @@
         List<Produto> carrinho = shoppingCart.produtosAdicionados;
         if (carrinho.Contains(produto)) {
             carrinho.Remove(produto);
-            // 'O produto "' + produto.nome + '" foi removido do carrinho.'
-            modalRef.ShowAsync();
+            modalRef.modalContent = "O produto [" + produto.nome + "] foi removido do carrinho.";
+            modalRef.Open();
         }
 
         // Faz o refresh do carrinho

@@ -1,5 +1,5 @@
 ﻿
-@inject BSModal modalRef;
+@inject InfoModal modalRef;
 
 <div class='vertical-container rounded-corners'>
     <img class='productImage' src='@produto.imagem' >
@@ -9,10 +9,7 @@
     <button class='roundIcon addToCart' @onclick="addToCart" />
 </div>
 
-<BSModal @ref="modalRef">
-    <InfoModal modalContent="" parent="modalRef"></InfoModal>
-</BSModal>
-
+<InfoModal @ref="modalRef" modalContent=""></InfoModal>
 
 @code {
     [Parameter]
@@ -28,14 +25,14 @@
 
         List<Produto> match = shoppingCart.produtosAdicionados.FindAll(item => item.id == produto.id);
         if (match.Count > 0) {
-            // "Este produto já se encontra no carrinho!";
-            modalRef.ShowAsync();
+            modalRef.modalContent = "Este produto já se encontra no carrinho!";
+            modalRef.Open();
             return;
         }
 
         shoppingCart.adicionar(produto);
-        // "Produto adicionado ao carrinho.";
-        modalRef.ShowAsync();
+        modalRef.modalContent = "Produto adicionado ao carrinho.";
+        modalRef.Open();
     }
 
 }
