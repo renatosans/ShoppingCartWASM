@@ -11,7 +11,8 @@ MySqlConnection conexao = new MySqlConnection(connectionString);
 conexao.Open();
 
 MySqlCommand comando = new MySqlCommand("SELECT * FROM produto", conexao);
-comando.ExecuteReader();
+var reader = comando.ExecuteReader();
+
 
 /*
 var provider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Public"));
@@ -25,6 +26,6 @@ var options = new StaticFileOptions()
 app.UseStaticFiles(options);
 */
 
-app.MapGet("/", () => "Carregando produtos...");
+app.MapGet("/", (HttpRequest req, HttpResponse res) => res.WriteAsync("Carregando produtos..."));
 
 app.Run();
