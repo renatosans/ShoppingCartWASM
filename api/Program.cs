@@ -8,6 +8,8 @@ var app = builder.Build();
 
 String connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
 MySqlConnection conexao = new MySqlConnection(connectionString);
+conexao.Open();
+
 MySqlCommand comando = new MySqlCommand("SELECT * FROM produto", conexao);
 comando.ExecuteReader();
 
