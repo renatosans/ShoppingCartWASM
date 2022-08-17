@@ -1,3 +1,16 @@
+
+CREATE DATABASE [MinimalApiDb]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'MinimalApiDb', FILENAME = N'C:\Users\Public\MinimalApiDb.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'MinimalApiDb_log', FILENAME = N'C:\Users\Public\MinimalApiDb_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+GO
+
+
+USE [MinimalApiDb]
+
+
 /****** Object:  Table [dbo].[Authors]    Script Date: 11/19/2021 4:08:44 AM ******/
 SET ANSI_NULLS ON
 GO
