@@ -89,7 +89,7 @@ app.MapPost("/login", [AllowAnonymous] async ([FromBodyAttribute] UserModel user
 
 
 // Sample Endpoint 
-app.MapGet("/", () => "Hello! This is .NET 6 Minimal API Demo").ExcludeFromDescription();
+app.MapGet("/", () => "Hello! This is .NET 6 Minimal API Demo.   /swagger para doc. Endpoints").ExcludeFromDescription();
 
 /*
 app.MapGet("/AuthorizedResource", (Func<string>)(
