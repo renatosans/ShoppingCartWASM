@@ -59,7 +59,7 @@ app.MapGet("/products_by_page", async (int pageNumber, int pageSize, CommerceDB 
 
 
 // Add a new Product to database
-app.MapPost("/books", async ([FromBody] Book addbook,[FromServices] BooksDB db, HttpResponse response) => {
+app.MapPost("/products", async ([FromBody] Product addProduct,[FromServices] CommerceDB db, HttpResponse response) => {
         db.Books.Add(addbook);
         await db.SaveChangesAsync();
         response.StatusCode = 200;
@@ -86,17 +86,13 @@ app.MapPut("/books", async (int bookID,string bookTitle, [FromServices] BooksDB 
 .WithName("UpdateBook").WithTags("Setters");
 
 
-app.MapGet("/books/search/{query}",
-    (string query, BooksDB db) =>
-    {
-        var _selectedBooks = db.Books.Where(x => x.Title.ToLower().Contains(query.ToLower())).ToList();
-
-        return _selectedBooks.Count>0? Results.Ok(_selectedBooks): Results.NotFound(Array.Empty<Book>());
-
-    })
-    .Produces<List<Book>>(StatusCodes.Status200OK)
+app.MapGet("/products/search/{query}", (string query, CommerceDB db) => {
+    var _selectedProducts = db.Products.Where(x => x.nome.ToLower().Contains(query.ToLower())).ToList();
+    return (_selectedProducts.Count > 0) ? Results.Ok(_selectedProducts) : Results.NotFound(Array.Empty<Product>());
+})
+.Produces<List<Product>>(StatusCodes.Status200OK)
 .WithName("Search").WithTags("Getters");
 
 
-//Run the application.
+// Run the application
 app.Run();
