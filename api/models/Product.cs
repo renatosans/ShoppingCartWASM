@@ -16,7 +16,7 @@ namespace APIDemo.Models
     class CommerceDB : DbContext
     {
         public CommerceDB(DbContextOptions<CommerceDB> options) : base(options) { }
-        public DbSet<Product> Products => Set<Product>();
+        public DbSet<Product> Produto => Set<Product>();
     }
 
 }
