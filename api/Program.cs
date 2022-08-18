@@ -36,25 +36,18 @@ app.UseSwaggerUI();
 app.MapGet("/", () => "Hello! This is .NET 6 Minimal API Demo.   /swagger para doc. Endpoints").ExcludeFromDescription();
 
 
-//Get All Books from the Sql Server DB using Paged Methods
-app.MapGet("/books", async (BooksDB db) =>
-
- await db.Books.ToListAsync()
-
-)
-.Produces<List<Book>>(StatusCodes.Status200OK)
-.WithName("GetAllBooks").WithTags("Getters");
+// Get all Products from database
+app.MapGet("/products", async (CommerceDB db) => await db.Products.ToListAsync())
+.Produces<List<Product>>(StatusCodes.Status200OK)
+.WithName("GetAllProducts").WithTags("Getters");
 
 
-//Get Books by ID from the Sql Server DB 
-app.MapGet("/books/{id}", async (BooksDB db, int id) =>
-
-   await db.Books.SingleOrDefaultAsync(s => s.BookID == id) is Book mybook ? Results.Ok(mybook)
-   : Results.NotFound()
-
+// Get Products by id from database
+app.MapGet("/products/{id}", async (CommerceDB db, int id) =>
+   await db.Products.SingleOrDefaultAsync(s => s.id == id) is Product prod ? Results.Ok(prod) : Results.NotFound()
  )
-.Produces<Book>(StatusCodes.Status200OK)
-.WithName("GetBookbyID").WithTags("Getters");
+.Produces<Product>(StatusCodes.Status200OK)
+.WithName("GetProductByID").WithTags("Getters");
 
 
 //Get All Books from the Sql Server DB using Paged Methods
