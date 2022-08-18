@@ -1,6 +1,7 @@
 ﻿
 namespace APIDemo.Models.Users
 {
+    /*
     public record UserDto(string UserName, string Password);
 
     public record UserModel
@@ -28,5 +29,5 @@ namespace APIDemo.Models.Users
             return _users.FirstOrDefault(x => string.Equals(x.UserName, userModel.UserName) && string.Equals(x.Password, userModel.Password));
         }
     }
-
+    */
 }

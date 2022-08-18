@@ -15,10 +15,10 @@ builder.Services.AddSwaggerGen(c => { });
 
 
 // builder.Services.AddSingleton<TokenService>(new TokenService());
-builder.Services.AddSingleton<IUserRepositoryService>(new UserRepositoryService());
-
+// builder.Services.AddSingleton<IUserRepositoryService>(new UserRepositoryService());
 // builder.Services.AddAuthorization();
 // builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt => { });
+
 
 await using var app = builder.Build();
 // app.UseAuthentication();
@@ -87,8 +87,9 @@ app.MapPut("/products/{id}", async (int id, [FromBody] Product updateProd, [From
 .WithName("UpdateProduct").WithTags("Setters");
 
 
-app.MapGet("/products/search/{query}", (string query, CommerceDB db) => {
-    var _selectedProducts = db.Products.Where(x => x.nome.ToLower().Contains(query.ToLower())).ToList();
+// Search Products that contain {keyword} in the description
+app.MapGet("/products/search/{keyword}", (string keyword, CommerceDB db) => {
+    var _selectedProducts = db.Products.Where(x => x.descricao.ToLower().Contains(keyword.ToLower())).ToList();
     return (_selectedProducts.Count > 0) ? Results.Ok(_selectedProducts) : Results.NotFound(Array.Empty<Product>());
 })
 .Produces<List<Product>>(StatusCodes.Status200OK)
