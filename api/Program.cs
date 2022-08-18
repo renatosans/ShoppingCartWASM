@@ -60,14 +60,14 @@ app.MapGet("/products_by_page", async (int pageNumber, int pageSize, CommerceDB 
 
 // Add a new Product to database
 app.MapPost("/products", async ([FromBody] Product addProduct,[FromServices] CommerceDB db, HttpResponse response) => {
-        db.Books.Add(addbook);
+        db.Products.Add(addProduct);
         await db.SaveChangesAsync();
         response.StatusCode = 200;
-        response.Headers.Location = $"books/{addbook.BookID}";
+        response.Headers.Location = $"products/{addProduct.id}";
 })
-.Accepts<Book>("application/json")
-.Produces<Book>(StatusCodes.Status201Created)
-.WithName("AddNewBook").WithTags("Setters");
+.Accepts<Product>("application/json")
+.Produces<Product>(StatusCodes.Status201Created)
+.WithName("AddNewProduct").WithTags("Setters");
 
 
 // Update existing book title
