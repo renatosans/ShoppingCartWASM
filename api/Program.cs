@@ -1,20 +1,18 @@
 
-//Create WebApplication Builder 
 var builder = WebApplication.CreateBuilder(args);
 
 
-//Inject Connection String and Create EFCore DB Context 
+// Inject Connection String and Create EFCore DB Context 
 builder.Services.AddDbContext<CommerceDB>(options => {
     String connectionString = builder.Configuration["ConnectionStrings:Default"];
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
 
-//Inject Swagger Services 
+// Inject Swagger Services 
 builder.Services.AddEndpointsApiExplorer();
-
-
 builder.Services.AddSwaggerGen(c => { });
+
 
 // builder.Services.AddSingleton<TokenService>(new TokenService());
 builder.Services.AddSingleton<IUserRepositoryService>(new UserRepositoryService());
@@ -33,7 +31,7 @@ app.UseSwaggerUI();
 
 
 // Sample Endpoint 
-app.MapGet("/", () => "Hello! This is .NET 6 Minimal API Demo.   /swagger para doc. Endpoints").ExcludeFromDescription();
+app.MapGet("/", () => "Hello! This is .NET 6 Minimal API.   /swagger to get Endpoints doc.").ExcludeFromDescription();
 
 
 // Get all Products from database
