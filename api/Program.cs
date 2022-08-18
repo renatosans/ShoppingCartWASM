@@ -59,11 +59,11 @@ app.MapGet("/products_by_page", async (int pageNumber, int pageSize, CommerceDB 
 
 
 // Add a new Product to database
-app.MapPost("/products", async ([FromBody] Product addProduct,[FromServices] CommerceDB db, HttpResponse response) => {
-        db.Products.Add(addProduct);
+app.MapPost("/products", async ([FromBody] Product addProd, [FromServices] CommerceDB db, HttpResponse response) => {
+        db.Products.Add(addProd);
         await db.SaveChangesAsync();
         response.StatusCode = 200;
-        response.Headers.Location = $"products/{addProduct.id}";
+        response.Headers.Location = $"products/{addProd.id}";
 })
 .Accepts<Product>("application/json")
 .Produces<Product>(StatusCodes.Status201Created)
@@ -71,16 +71,17 @@ app.MapPost("/products", async ([FromBody] Product addProduct,[FromServices] Com
 
 
 // Update existing Product
-app.MapPut("/products", async (int id, string nome, decimal preco, [FromServices] CommerceDB db, HttpResponse response) => {
+app.MapPut("/products/{id}", async (int id, [FromBody] Product updateProd, [FromServices] CommerceDB db, HttpResponse response) => {
         var prod = db.Products.SingleOrDefault(s => s.id == id);
         if (prod == null) return Results.NotFound();
 
-        prod.nome = nome;
-        prod.preco = preco;
-        // prod.descricao = descricao;
-        // prod.foto = foto;
-        // prod.formatoImagem = formatoImagem;
-        // prod.dataCriacao = dataCriacao;
+        prod.nome = updateProd.nome;
+        prod.preco = updateProd.preco;
+        prod.descricao = updateProd.descricao;
+        prod.foto = updateProd.foto;
+        prod.formatoImagem = updateProd.formatoImagem;
+        prod.dataCriacao = updateProd.dataCriacao;
+
         await db.SaveChangesAsync();
         return Results.Created("/products", prod);
 })
