@@ -50,7 +50,7 @@ app.MapGet("/products/{id}", async (CommerceDB db, int id) =>
 .WithName("GetProductByID").WithTags("Getters");
 
 
-//Get all Products from database using Paged Methods
+// Get all Products from database using Paged Methods
 app.MapGet("/products_by_page", async (int pageNumber, int pageSize, CommerceDB db) =>
     await db.Products.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync()
 )
@@ -70,20 +70,22 @@ app.MapPost("/products", async ([FromBody] Product addProduct,[FromServices] Com
 .WithName("AddNewProduct").WithTags("Setters");
 
 
-// Update existing book title
-app.MapPut("/books", async (int bookID,string bookTitle, [FromServices] BooksDB db, HttpResponse response) => {
-        var mybook = db.Books.SingleOrDefault(s => s.BookID == bookID);
+// Update existing Product
+app.MapPut("/products", async (int id, string nome, decimal preco, [FromServices] CommerceDB db, HttpResponse response) => {
+        var prod = db.Products.SingleOrDefault(s => s.id == id);
+        if (prod == null) return Results.NotFound();
 
-        if (mybook == null) return Results.NotFound();
-
-        mybook.Title = bookTitle;
-        
+        prod.nome = nome;
+        prod.preco = preco;
+        // prod.descricao = descricao;
+        // prod.foto = foto;
+        // prod.formatoImagem = formatoImagem;
+        // prod.dataCriacao = dataCriacao;
         await db.SaveChangesAsync();
-        return Results.Created("/books",mybook);
-
+        return Results.Created("/products", prod);
 })
-.Produces<Book>(StatusCodes.Status201Created).Produces(StatusCodes.Status404NotFound)
-.WithName("UpdateBook").WithTags("Setters");
+.Produces<Product>(StatusCodes.Status201Created).Produces(StatusCodes.Status404NotFound)
+.WithName("UpdateProduct").WithTags("Setters");
 
 
 app.MapGet("/products/search/{query}", (string query, CommerceDB db) => {
