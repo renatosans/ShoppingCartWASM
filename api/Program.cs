@@ -4,10 +4,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 //Inject Connection String and Create EFCore DB Context 
-builder.Services.AddDbContext<BooksDB>(options =>
-{
+builder.Services.AddDbContext<CommerceDB>(options => {
     String connectionString = builder.Configuration["ConnectionStrings:Default"];
-    options.UseSqlServer(connectionString);
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
 
@@ -15,30 +14,7 @@ builder.Services.AddDbContext<BooksDB>(options =>
 builder.Services.AddEndpointsApiExplorer();
 
 
-builder.Services.AddSwaggerGen(c =>
-{
-    /*
-    var securityScheme = new OpenApiSecurityScheme
-    {
-        Name = "JWT Authentication",
-        Description = "Enter JWT Bearer token **_only_**",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.Http,
-        Scheme = "bearer", // must be lower case
-        BearerFormat = "JWT",
-        Reference = new OpenApiReference
-        {
-            Id = JwtBearerDefaults.AuthenticationScheme,
-            Type = ReferenceType.SecurityScheme
-        }
-    };
-    c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {securityScheme, new string[] { }}
-    });
-    */
-});
+builder.Services.AddSwaggerGen(c => { });
 
 // builder.Services.AddSingleton<TokenService>(new TokenService());
 builder.Services.AddSingleton<IUserRepositoryService>(new UserRepositoryService());
