@@ -19,22 +19,8 @@ builder.Services.AddSwaggerGen(c => { });
 // builder.Services.AddSingleton<TokenService>(new TokenService());
 builder.Services.AddSingleton<IUserRepositoryService>(new UserRepositoryService());
 
-/*
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
-{
-    opt.TokenValidationParameters = new()
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-    };
-});
-*/
+// builder.Services.AddAuthorization();
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt => { });
 
 await using var app = builder.Build();
 // app.UseAuthentication();
@@ -46,35 +32,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 
-/*
-app.MapPost("/login", [AllowAnonymous] async ([FromBodyAttribute] UserModel userModel, TokenService tokenService, IUserRepositoryService userRepositoryService, HttpResponse response) =>
-{
-    var userDto = userRepositoryService.GetUser(userModel);
-    if (userDto == null)
-    {
-        response.StatusCode = 401;
-        return;
-    }
-
-    var token = tokenService.BuildToken(builder.Configuration["Jwt:Key"], builder.Configuration["Jwt:Issuer"], builder.Configuration["Jwt:Audience"], userDto);
-    await response.WriteAsJsonAsync(new { token = token });
-    return;
-}).Produces(StatusCodes.Status200OK)
-.WithName("Login").WithTags("Accounts");
-*/
-
-
 // Sample Endpoint 
 app.MapGet("/", () => "Hello! This is .NET 6 Minimal API Demo.   /swagger para doc. Endpoints").ExcludeFromDescription();
-
-/*
-app.MapGet("/AuthorizedResource", (Func<string>)(
-
-    [Authorize] () => "Action Succeeded")
-
-    ).Produces(StatusCodes.Status200OK)
-.WithName("Authorized").WithTags("Accounts").RequireAuthorization();
-*/
 
 
 //Get All Books from the Sql Server DB using Paged Methods
