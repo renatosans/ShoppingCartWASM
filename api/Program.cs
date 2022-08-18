@@ -50,24 +50,15 @@ app.MapGet("/products/{id}", async (CommerceDB db, int id) =>
 .WithName("GetProductByID").WithTags("Getters");
 
 
-//Get All Books from the Sql Server DB using Paged Methods
-app.MapGet("/books_by_page", async (int pageNumber,int pageSize, BooksDB db) =>
-
-await db.Books
-               .Skip((pageNumber - 1) * pageSize)
-               .Take(pageSize)
-               .ToListAsync()
-
-
-//await db.Books.ToListAsync()
-
+//Get all Products from database using Paged Methods
+app.MapGet("/products_by_page", async (int pageNumber, int pageSize, CommerceDB db) =>
+    await db.Products.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync()
 )
-.Produces<List<Book>>(StatusCodes.Status200OK)
-.WithName("GetBooksByPage").WithTags("Getters");
- 
+.Produces<List<Product>>(StatusCodes.Status200OK)
+.WithName("GetProductsByPage").WithTags("Getters");
 
 
-// Add new book to Sql Server DB 
+// Add a new Product to database
 app.MapPost("/books", async ([FromBody] Book addbook,[FromServices] BooksDB db, HttpResponse response) => {
         db.Books.Add(addbook);
         await db.SaveChangesAsync();
