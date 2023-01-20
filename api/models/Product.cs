@@ -1,6 +1,11 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace APIDemo.Models
 {
+    // TODO: use annotation to ajust tablename to camelCase
+
+    [Table("Product")]
     public class Product
     {
         [Key]
