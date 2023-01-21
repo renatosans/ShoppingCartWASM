@@ -5,7 +5,7 @@ namespace APIDemo.Models
 {
     // TODO: use annotation to ajust tablename to camelCase
 
-    [Table("Product")]
+    [Table("produto")]
     public class Product
     {
         [Key]
